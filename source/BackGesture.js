@@ -7,9 +7,9 @@
 */
 
 (function() {
-	document.addEventListener('keyup', function(ev) {
+	enyo.dispatcher.listen(document, 'keyup', function(ev) {
 		if (ev.keyIdentifier == "U+1200001" || ev.keyIdentifier == "U+001B") {
 			enyo.Signals && enyo.Signals.send && enyo.Signals.send('onbackbutton');
 		}
-	}, false);
+	});
 })()
