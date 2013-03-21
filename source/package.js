@@ -5,6 +5,7 @@ enyo.depends(
 	"ServiceRequest.js",
 	"BackGesture.js",
 	"ProgressOrb.js",
+	"ProgressOrb.css",
 	"NumberPad.js",
 	"CrossAppUI.js",
 	"FilePicker.js"
