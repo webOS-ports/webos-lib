@@ -53,3 +53,32 @@ Ported across from Enyo 1, this is a CrossAppUI kind that points to the built-in
 
 **Example:**
      {name: "ImagePicker", kind: "FilePicker", fileType:["image"], onPickFile: "selectedImageFile"}
+
+##AppMenu
+
+Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard app menu shown in webOS apps. This will have a slightly different style, though, since it uses onyx.Menu as opposed to a custom background image.
+
+**onSelect Output:**
+	
+
+**Example:**
+	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something"}]}
+
+##HtmlContent
+
+Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` set so you don't have to
+
+**Example:**
+	{kind:"HtmlContent", content:"This content is<br />separated by an HTML line break (&lt;br /&gt;) tag"}
+
+##ModalDialog
+
+Another kind ported from Enyo 1, this is an onyx.Popup that has `modal:true` and `autoDismiss:false` set to act like a modal dialog
+
+**Example:**
+	{name: "myDialog", kind:"ModalDialog", components[/* your components */, { kind: onyx.Button, content: "Close popup", ontap: "closePopup"}]}
+	closePopup: function() {this.$.myDialog.hide()};
+
+##WebView
+
+This is a port of code from Enyo 1 to Enyo 2 to enable the use of a WebView widget (think of it like an iframe) inside an Enyo app on webOS. This uses Enyo 1 code and was slightly modified to enable it to work with Enyo 2. For complete documentation, refer to https://developer.palm.com/content/api/reference/enyo/enyo-api-reference.html#enyo.WebView (ignore the Inheritance section and all other kinds)
