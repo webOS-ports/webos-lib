@@ -58,17 +58,16 @@ Ported across from Enyo 1, this is a CrossAppUI kind that points to the built-in
 
 Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard app menu shown in webOS apps. This will have a slightly different style, though, since it uses onyx.Menu as opposed to a custom background image.
 
-**onSelect Output:**
-	
-
 **Example:**
-	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something"}]}
+
+	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something", ontap: "doSomething"}]}
 
 ##HtmlContent
 
 Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` set so you don't have to
 
 **Example:**
+
 	{kind:"HtmlContent", content:"This content is<br />separated by an HTML line break (&lt;br /&gt;) tag"}
 
 ##ModalDialog
@@ -76,6 +75,7 @@ Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` s
 Another kind ported from Enyo 1, this is an onyx.Popup that has `modal:true` and `autoDismiss:false` set to act like a modal dialog
 
 **Example:**
+
 	{name: "myDialog", kind:"ModalDialog", components[/* your components */, { kind: onyx.Button, content: "Close popup", ontap: "closePopup"}]}
 	closePopup: function() {this.$.myDialog.hide()};
 
