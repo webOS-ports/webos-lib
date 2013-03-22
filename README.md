@@ -1,6 +1,7 @@
 #webos-lib
 
 *A selection of enyo2 kinds to restore functionality missing from enyo1*
+
 *Unified from webos-ports-lib, webOS-Ext & enyo1-to-enyo2 kinds by ShiftyAxel, Jason Robitaille and Arthur Thornton*
 
 ##BackGesture
