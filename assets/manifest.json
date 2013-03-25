@@ -1,0 +1,6 @@
+{
+	"version": "2.2.0",
+	"packages": [
+		{"name": "webos-lib", "path": "webos-lib/source"}
+	]
+}
