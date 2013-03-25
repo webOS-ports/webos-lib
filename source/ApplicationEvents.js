@@ -15,7 +15,7 @@ enyo.requiresWindow(function() {
 
 		// LunaSysMgr calls this whenever an app is "launched;" 
 		Mojo.relaunch = function() {
-			var param = enyo.json.parse(PalmSystem.launchParams || "{}") || {};
+			var param = webos.launchParams();
 			if(param["palm-command"] == "open-app-menu") {
 				enyo.Signals.send("onmenubutton");
 			} else {

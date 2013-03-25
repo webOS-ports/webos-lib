@@ -9,7 +9,7 @@ enyo.kind({
 	components: [
 		{
 			kind: enyo.Signals,
-			onToggleAppMenu: "toggle"
+			onmenubutton: "toggle"
 		}
 	],
 	//* @public

@@ -35,12 +35,12 @@ enyo.kind({
 	appChanged: function() {
 		this.appPath = "";
 		if (this.app) {
-			var request = navigator.service.Request("luna://com.palm.applicationManager/",
-			{
-				method: 'getAppBasePath',
-				parameters: {appId: this.app},
-				onSuccess: enyo.bind(this, "gotAppInfo")
+			var request = new enyo.ServiceRequest({
+				service: "palm://com.palm.applicationManager",
+				method: "getAppBasePath"
 			});
+			request.response(this, "gotAppInfo");
+			request.go({appId: this.app});
 
 		} else {
 			this.pathChanged(); // rebuild whole path.

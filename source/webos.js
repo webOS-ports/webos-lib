@@ -17,6 +17,38 @@ enyo.requiresWindow(function() {
 			deviceInfo: function(){
 				return enyo.json.parse(PalmSystem.deviceInfo);
 			},
+			fetchAppRootPath: function() {
+				var base = window.location.href;
+				if('baseURI' in window.document) {
+					base = window.document.baseURI;
+				} else {
+					var baseTags = window.document.getElementsByTagName("base");
+					if(baseTags.length > 0) {
+						base = baseTags[0].href;
+					}
+				}
+				var match = base.match(new RegExp(".*:\/\/[^#]*\/"));
+				if (match) {
+					return match[0];
+				}
+				return "";
+			},
+			fetchAppInfo: function() {
+				if (!webos.appInfo) {
+					try {
+						var appInfoJSON, appInfoPath = webos.fetchAppRootPath() + "appinfo.json";
+						if (window.palmGetResource) {
+							appInfoJSON = palmGetResource(appInfoPath);
+						} else {
+							appInfoJSON = enyo.xhr.request({url: appInfoPath, sync: true}).responseText;
+						}
+						webos.appInfo = enyo.json.parse(appInfoJSON);
+					} catch (e) {
+						webos.appInfo = undefined;
+					}
+				}
+				return webos.appInfo;
+			},
 			localeInfo: function(){
 				return {
 					locale: PalmSystem.locale,
@@ -111,6 +143,4 @@ enyo.requiresWindow(function() {
 		};
 	}
 });
-webOS = window.webOS;
-enyo.webOS = webOS;
-enyo.webos = enyo.webOS;
+enyo.webos = webos;

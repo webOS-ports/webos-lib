@@ -6,7 +6,7 @@ enyo.requiresWindow(function() {
 			webos.keyboard._isShowing = inKeyboardShowing;
 			enyo.Signals.send("onvirtualkeyboard", {type:"virtualkeyboard", showing: inKeyboardShowing});
 		}
-
+		webos = window.webos || {};
 		webos.keyboard = {
 			types: {
 				text: 0,

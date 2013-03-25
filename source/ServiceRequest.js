@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "webos.ServiceRequest",
+	name: "enyo.ServiceRequest",
 	kind: enyo.Async,
 	resubscribeDelay: 10000,
 	published: {
@@ -11,12 +11,12 @@ enyo.kind({
 	constructor: function(inParams) {
 		enyo.mixin(this, inParams);
 		this.inherited(arguments);
-		if(enyo.webos._serviceCounter == undefined) {
-			enyo.webos._serviceCounter = 1;
+		if(enyo._serviceCounter == undefined) {
+			enyo._serviceCounter = 1;
 		} else {
-			enyo.webos._serviceCounter++;
+			enyo._serviceCounter++;
 		}
-		this.id = enyo.webos._serviceCounter;
+		this.id = enyo._serviceCounter;
 	},
 	go: function(inParams) {
 		if(!PalmServiceBridge) {
