@@ -1,6 +1,6 @@
 {
 	"version": "2.2.0",
 	"packages": [
-		{"name": "webos-lib", "path": "webos-lib/source"}
+		{"name": "webos-lib", "path": "https://raw.github.com/webOS-ports/webos-lib/master/source/"}
 	]
 }
