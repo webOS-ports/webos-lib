@@ -4003,6 +4003,7 @@ name: "PackageList",
 components: [ {
 kind: "Repeater",
 components: [ {
+name: "row",
 components: [ {
 kind: "Checkbox",
 onchange: "cbChange"
@@ -4053,7 +4054,7 @@ this.pkgs ? this.gotPackageData(this.pkgs) : this.fetchPackageData();
 savePackageData: function() {},
 setupItem: function(e, t) {
 var n = this.pkgs[t.index], r = t.item.$.checkbox;
-r.setContent(n.name), r.setChecked(!n.disabled);
+r.setContent(n.name), r.setChecked(!n.disabled), t.item.$.row.setShowing(!n.hidden);
 },
 cbChange: function(e, t) {
 var n = t.index, r = this.pkgs[n];
@@ -4228,12 +4229,15 @@ this.index = this.$.analyzer.index = new Indexer, this.$.packages.loadPackageDat
 packagesLoaded: function(e, t) {
 document.title = "Enyo API Viewer (" + t.version + ")";
 var n = [];
-return enyo.forEach(t.packages, function(e) {
-e.disabled || n.push({
-path: e.path,
-label: e.name
-});
-}), this.walk(n), !0;
+this.hidden = [];
+for (var r = 0; r < t.packages.length; r++) {
+var i = t.packages[r];
+t.packages[r].disabled || n.push({
+path: i.path,
+label: i.name
+}), i.hidden && this.hidden.push(i.name);
+}
+return this.walk(n), !0;
 },
 walk: function(e) {
 this.walking = !0, this.$.indexBusy.show(), this.$.analyzer.walk(e);
@@ -4245,11 +4249,15 @@ indexalize: function(e, t, n) {
 var r = e ? enyo.filter(this.index.objects, e, this) : this.index.objects;
 e(r[0]) && r.sort(this.moduleCompare), r = this.nameFilter(r);
 var i = "", s;
-for (var o = 0, u; u = r[o]; o++) {
+for (var o = 0, u; u = r[o]; o++) if (this.visibleModule(u)) {
 var a = n(u).divider;
 a && s != a && (s = a, i += "<divider>" + a + "</divider>"), i += enyo.macroize(t, n(u));
 }
 return i;
+},
+visibleModule: function(e) {
+var t = e.module || (e.object ? e.object.module : undefined), n = t ? t.label : e.label;
+return this.hidden.indexOf(n) < 0;
 },
 moduleCompare: function(e, t) {
 var n, r;

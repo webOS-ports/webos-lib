@@ -1,6 +1,9 @@
 {
 	"version": "2.2.0",
 	"packages": [
-		{"name": "webos-lib", "path": "webos-lib/source"}
+		{"name": "webos-lib", "path": "webos-lib/source"},
+		{"name": "enyo", "path": "enyo/source"},
+		{"name": "layout", "path": "layout"},
+		{"name": "onyx", "path": "onyx"}
 	]
 }
