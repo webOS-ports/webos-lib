@@ -1,5 +1,5 @@
 enyo.requiresWindow(function() {
-	if(enyo.platform.webos >= 3) {
+	if(enyo.platform.webos && enyo.platform.webos >= 3) {
 		//if device has a virtual keyboard, add functions
 		Mojo = window.Mojo || {};
 		Mojo.keyboardShown = function (inKeyboardShowing) {

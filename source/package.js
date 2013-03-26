@@ -1,6 +1,7 @@
 enyo.depends(
 	"webos.js",
 	"VirtualKeyboard.js",
+	"SymKey.js",
 	"ApplicationEvents.js",
 	"ServiceRequest.js",
 	"BackGesture.js",
