@@ -11,7 +11,6 @@ enyo.depends(
 	"FilePicker.js",
 	"AppMenu.js",
 	"AppMenu.css",
-	"Common.js",
 	"HtmlContent.js",
 	"ModalDialog.js",
 	"WebView.js"

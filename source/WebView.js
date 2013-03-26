@@ -650,6 +650,7 @@ enyo.kind({
 		this.urlTitleChanged(inUrl, inTitle, inCanGoBack, inCanGoForward);
 	}
 });
+//* @public
 /**
 A control that shows web content with built-in scroller.
 
