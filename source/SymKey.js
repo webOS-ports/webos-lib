@@ -50,7 +50,7 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 			this.sendFakeKey("keypress", charCode);
 			this.sendFakeKey("keyup", charCode);
 		},
-		sendFakeKey(eventType, charCode) {
+		sendFakeKey: function(eventType, charCode) {
 			var e = document.createEvent("Events");
 			e.initEvent(type, true, true);
 
