@@ -1,11 +1,21 @@
+/**
+	Static symkey functionality for webOS 1.x and 2.x.
+	
+	When the symkey on the physical keyboard is pressed, this properly opens the
+	symtable within webOS.  Automatically opens on the symkey, but can also be
+	manually activated from `webos.SymKey.show()`.
+*/
+
 if(enyo.platform.webos && enyo.platform.webos < 3) {
 	enyo.singleton({
 		name: "webos.SymKey",
+		//* @protected
 		kind: enyo.Component,
 		components: [
 			{kind:"enyo.Signals", onkeydown:"keydown", onrelaunch:"relaunch"}
 		],
 		//* @public
+		//* Opens the webOS symtable popup.
 		show: function(target) {
 			this.symKeyTarget = target || document;
 			this.request = new webOS.ServiceRequest({
