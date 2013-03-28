@@ -4,6 +4,27 @@
 
 *Unified from webos-ports-lib, webOS-Ext & enyo1-to-enyo2 kinds by ShiftyAxel, Jason Robitaille and Arthur Thornton*
 
+##AppMenu
+
+Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard app menu shown in webOS apps. This will have a slightly different style, though, since it uses onyx.Menu as opposed to a custom background image.
+
+**Example:**
+
+	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something", ontap: "doSomething"}]}
+
+#ApplicationEvents
+
+Binds LunaSysMgr application events to Enyo signals.
+	
+>_onactivate_: When the window is activated<br>
+>_ondeactivate_: When the window is deactivated<br>
+>_onmenubutton_: When the app menu is toggled<br>
+>_onrelaunch_: When the app is relaunched<br>
+
+**Example:**
+
+	{kind: "enyo.Signals", onactivate: "handleActivate", ondeactivate: "handleDeactivate", onmenubutton: "handleMenuButton", onrelaunch: "handleRelaunch"}
+
 ##BackGesture
 
 A function that listens for the webOS Back Gesture and fires the onbackbutton signal. Both 2.x and Open webOS are supported, as well as phonegap and the Esc key on desktop browsers.
@@ -11,23 +32,6 @@ A function that listens for the webOS Back Gesture and fires the onbackbutton si
 **Example:**
 
      {kind: "enyo.Signals", onbackbutton: "handleBackGesture"}
-     
-##ProgressOrb
-
-A circular variant of the onyx progress bar with an button in the center. Uses an enyo.Animator for smooth transitions between values.
-Published properties are value, min and max.
-This is an enyo2 reimagining of the progress indicator from the webOS 2.x Browser.
-
-**Example:**
-
-     {name: "FooOrb",
-     kind: "ProgressOrb",
-     style: "position: absolute; right: 8px; bottom: 8px;",
-     content: "O",
-     onButtonTap: "buttonTapped"},
-     buttonTapped: function(inSender, inEvent) {
-	this.$.FooOrb.setValue(this.$.FooOrb.value + 100);
-     },
 
 ##CrossAppUI
 
@@ -58,14 +62,6 @@ Ported across from Enyo 1, this is a CrossAppUI kind that points to the built-in
 
      {name: "ImagePicker", kind: "FilePicker", fileType:["image"], onPickFile: "selectedImageFile"}
 
-##AppMenu
-
-Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard app menu shown in webOS apps. This will have a slightly different style, though, since it uses onyx.Menu as opposed to a custom background image.
-
-**Example:**
-
-	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something", ontap: "doSomething"}]}
-
 ##HtmlContent
 
 Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` set so you don't have to
@@ -83,6 +79,64 @@ Another kind ported from Enyo 1, this is an onyx.Popup that has `modal:true` and
 	{name: "myDialog", kind:"ModalDialog", components[/* your components */, { kind: onyx.Button, content: "Close popup", ontap: "closePopup"}]}
 	closePopup: function() {this.$.myDialog.hide()};
 
+##ProgressOrb
+
+A circular variant of the onyx progress bar with an button in the center. Uses an enyo.Animator for smooth transitions between values.
+Published properties are value, min and max.
+This is an enyo2 reimagining of the progress indicator from the webOS 2.x Browser.
+
+**Example:**
+
+     {name: "FooOrb",
+     kind: "ProgressOrb",
+     style: "position: absolute; right: 8px; bottom: 8px;",
+     content: "O",
+     onButtonTap: "buttonTapped"},
+     buttonTapped: function(inSender, inEvent) {
+	this.$.FooOrb.setValue(this.$.FooOrb.value + 100);
+     },
+
+##ServiceRequest
+
+An extension of the enyo.Async object designed for webOS service requests. Supports subscription services.
+
+**Example:**
+
+	var request = new enyo.ServiceRequest({
+		service: "palm://com.palm.systemservice/time",
+		method: "getSystemTime"
+	});
+	request.response(this, "responseSuccess");
+	request.error(this, "responseFailure");
+	request.go({}); //any params would go in here
+
+##SymKey
+
+Static symkey functionality for webOS 1.x and 2.x.
+	
+When the symkey on the physical keyboard is pressed, this properly opens the
+symtable within webOS.  Automatically opens on the symkey, but can also be
+manually activated from `webos.SymKey.show()`.
+
+##VirtualKeyboard
+
+Collection of static webOS virtual keyboard functions and constants.	
+Sends an _onvirtualkeyboard_ signal that you can listen for.
+
+**Example:**
+
+	{kind: "enyo.Signals", onvirtualkeyboard: "handleVirtualKeyboard"}
+
 ##WebView
 
-This is a port of code from Enyo 1 to Enyo 2 to enable the use of a WebView widget (think of it like an iframe) inside an Enyo app on webOS. This uses Enyo 1 code and was slightly modified to enable it to work with Enyo 2. For complete documentation, refer to https://developer.palm.com/content/api/reference/enyo/enyo-api-reference.html#enyo.WebView (ignore the Inheritance section and all other kinds)
+This is a port of code from Enyo 1 to Enyo 2 to enable the use of a WebView widget
+(think of it like an iframe) inside an Enyo app on webOS. This uses Enyo 1 code and
+was slightly modified to enable it to work with Enyo 2. For complete documentation,
+refer to [this document](https://developer.palm.com/content/api/reference/enyo/enyo-api-reference.html#enyo.WebView)
+(ignore the Inheritance section and all other kinds)
+
+##webos.js
+
+A collection of static variables and functions core to webOS functionality
+and the webOS feature-set. A large amount of PalmSystem bindings combined
+with some utility functions.
