@@ -1,13 +1,28 @@
+/**
+	An extension of the enyo.Async object designed for webOS service requests.
+*/
+
 enyo.kind({
 	name: "enyo.ServiceRequest",
 	kind: enyo.Async,
+	//* @protected
 	resubscribeDelay: 10000,
+	//* @public
 	published: {
+		//* Palm service URI.  Starts with palm://
 		service:"",
+		//* Service method you want to call
 		method:"",
+		//* Whether or not the request to subscribe to the service
 		subscribe: false,
+		//* Whether or not the request should resubscribe when an error is returned
 		resubscribe: false
 	},
+	/**
+		Properties passed in the inParams object will be mixed into the object itself,
+		so you can optionally set properties like _"service"_ and _"method"_ inline in the
+		constructor rather than using the setters individually.
+	*.
 	constructor: function(inParams) {
 		enyo.mixin(this, inParams);
 		this.inherited(arguments);
@@ -18,6 +33,7 @@ enyo.kind({
 		}
 		this.id = enyo._serviceCounter;
 	},
+	//* Execute the service request with an optional object for parameters to be sent.
 	go: function(inParams) {
 		if(!PalmServiceBridge) {
 			this.fail({
@@ -42,6 +58,7 @@ enyo.kind({
 		this.bridge.call(fullUrl, enyo.json.stringify(this.params));
 		return this;
 	},
+	//* Cancel the request/subscription.
 	cancel: function() {
 		this.cancelled = true;
 		this.responders = [];
@@ -54,6 +71,7 @@ enyo.kind({
 			this.bridge = undefined;
 		}
 	},
+	//* @protected
 	serviceCallback: function(respMsg) {
 		var parsedMsg, error;
 		if(this.cancelled) {
