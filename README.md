@@ -57,7 +57,7 @@ Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` s
 
 	{kind:"HtmlContent", content:"This content is<br />separated by an HTML line break (&lt;br /&gt;) tag"}
 
-#ApplicationEvents
+##LunaBindings
 
 Binds LunaSysMgr application events to Enyo signals.
 	
@@ -69,7 +69,7 @@ Binds LunaSysMgr application events to Enyo signals.
 
 **Example:**
 
-	{kind: "enyo.Signals", onactivate: "handleActivate", ondeactivate: "handleDeactivate", onmenubutton: "handleMenuButton", onrelaunch: "handleRelaunch"}
+	{kind: "enyo.Signals", onactivate: "handleActivate", ondeactivate: "handleDeactivate", onmenubutton: "handleMenuButton", onrelaunch: "handleRelaunch", onlowmemory:"handleLowMemory"}
 
 ##ModalDialog
 
