@@ -22,7 +22,7 @@ enyo.kind({
 		Properties passed in the inParams object will be mixed into the object itself,
 		so you can optionally set properties like _"service"_ and _"method"_ inline in the
 		constructor rather than using the setters individually.
-	*.
+	*/
 	constructor: function(inParams) {
 		enyo.mixin(this, inParams);
 		this.inherited(arguments);
