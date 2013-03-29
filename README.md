@@ -12,19 +12,6 @@ Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard
 
 	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something", ontap: "doSomething"}]}
 
-#ApplicationEvents
-
-Binds LunaSysMgr application events to Enyo signals.
-	
->_onactivate_: When the window is activated<br>
->_ondeactivate_: When the window is deactivated<br>
->_onmenubutton_: When the app menu is toggled<br>
->_onrelaunch_: When the app is relaunched<br>
-
-**Example:**
-
-	{kind: "enyo.Signals", onactivate: "handleActivate", ondeactivate: "handleDeactivate", onmenubutton: "handleMenuButton", onrelaunch: "handleRelaunch"}
-
 ##BackGesture
 
 A function that listens for the webOS Back Gesture and fires the onbackbutton signal. Both 2.x and Open webOS are supported, as well as phonegap and the Esc key on desktop browsers.
@@ -69,6 +56,20 @@ Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` s
 **Example:**
 
 	{kind:"HtmlContent", content:"This content is<br />separated by an HTML line break (&lt;br /&gt;) tag"}
+
+#ApplicationEvents
+
+Binds LunaSysMgr application events to Enyo signals.
+	
+>_onactivate_: When the window is activated<br>
+>_ondeactivate_: When the window is deactivated<br>
+>_onmenubutton_: When the app menu is toggled<br>
+>_onrelaunch_: When the app is relaunched<br>
+>_onlowmemory_: To monitor for high memory usage<br>
+
+**Example:**
+
+	{kind: "enyo.Signals", onactivate: "handleActivate", ondeactivate: "handleDeactivate", onmenubutton: "handleMenuButton", onrelaunch: "handleRelaunch"}
 
 ##ModalDialog
 
