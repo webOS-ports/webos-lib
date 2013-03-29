@@ -5,6 +5,7 @@
 	_"ondeactivate"_: When the window is deactivated
 	_"onmenubutton"_: When the app menu is toggled
 	_"onrelaunch"_: When the app is relaunched
+	_"onlowmemory"_: Used to monitor an app's memory uasage
 */
 
 if (window.PalmSystem) {
@@ -46,9 +47,9 @@ if (window.PalmSystem) {
 		enyo.Signals.send("onapphide");
 	};
 	
-	// On a webOS device, Enyo will send a "lowMemory" event to the first component created. This has a `state`
-	// property with the value "low", "critical", or "normal". Applications that use significant memory
-	// can watch for this event and try to reduce their memory usage when they see a non-normal state.
+	// Applications that use significant memory can watch for this event and try to reduce
+	// their memory usage when they see a non-normal state. This has a `state` property
+	// with the value "low", "critical", or "normal".
 	Mojo.lowMemoryNotification = function(params) {
 		enyo.Signals.send("onlowmemory", {type: "lowmemory", state: params.state});
 	};
