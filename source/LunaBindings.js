@@ -33,4 +33,23 @@ if (window.PalmSystem) {
 		// opened window of an app with multiple windows.
 		return true;
 	};
+	
+	// LunaSysMgr calls this when a KeepAlive app's window is shown
+	// Only used by webOS builtin system apps
+	Mojo.show = function() {
+		enyo.Signals.send("onappshown");
+	};
+	
+	// LunaSysMgr calls this when a KeepAlive app's window is hidden
+	// Only used by webOS builtin system apps
+	Mojo.hide = function() {
+		enyo.Signals.send("onapphide");
+	};
+	
+	// On a webOS device, Enyo will send a "lowMemory" event to the first component created. This has a `state`
+	// property with the value "low", "critical", or "normal". Applications that use significant memory
+	// can watch for this event and try to reduce their memory usage when they see a non-normal state.
+	Mojo.lowMemoryNotification = function(params) {
+		enyo.Signals.send("onlowmemory", {type: "lowmemory", state: params.state});
+	};
 }
