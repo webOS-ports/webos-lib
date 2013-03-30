@@ -14,7 +14,7 @@ Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard
 
 ##ApplicationEvents
 
-A convenient subkind of enyo.Signals that outlines all of the webOS-specific events from webos-lib.
+A convenient subkind of _enyo.Signals_ that outlines all of the webOS-specific events from webos-lib.
 
 **Example:**
 
