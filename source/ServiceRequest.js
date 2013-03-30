@@ -1,5 +1,5 @@
 /**
-	An extension of the enyo.Async object designed for webOS service requests.
+	An extension of the <a href="#enyo.Async">enyo.Async</a> object designed for webOS service requests.
 */
 
 enyo.kind({

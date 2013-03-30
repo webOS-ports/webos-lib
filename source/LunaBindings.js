@@ -1,5 +1,5 @@
 /**
-	Binds LunaSysMgr application events to Enyo signals.
+	Binds LunaSysMgr application events to <a href="#enyo.Signals">enyo.Signals</a>.
 	
 	_"onactivate"_: When the window is activated
 	_"ondeactivate"_: When the window is deactivated

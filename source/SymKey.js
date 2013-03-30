@@ -3,12 +3,12 @@
 	
 	When the symkey on the physical keyboard is pressed, this properly opens the
 	symtable within webOS.  Automatically opens on the symkey, but can also be
-	manually activated from `webos.SymKey.show()`.
+	manually activated from `webos.showSymTable()`.
 */
 
 if(enyo.platform.webos && enyo.platform.webos < 3) {
 	enyo.singleton({
-		name: "webos.SymKey",
+		name: "enyo.SymKey",
 		//* @protected
 		kind: enyo.Component,
 		components: [
@@ -73,3 +73,19 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 		}
 	});
 }
+
+/* @public
+/**
+	Opens the webOS symtable popup on webOS 1.x and 2.x devices.
+	
+	Should rarely ever need to be manually called, as it is called by default whenever
+	the symkey on the physical keyboard is pressed.
+	
+	The optional _target_ parameter specifies the target editable element that will
+	receive the key input events. Default, if not specified, is `document`.
+*/
+webos.showSymTable = function(target) {
+	if(enyo.platform.webos && enyo.platform.webos < 3) {
+		enyo.SymKey.show(target);
+	}
+};
