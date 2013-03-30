@@ -12,6 +12,15 @@ Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard
 
 	{kind:"AppMenu", onSelect: "appMenuItemSelected", components: [{content:"Do something", ontap: "doSomething"}]}
 
+##ApplicationEvents
+
+A convenient subkind of enyo.Signals that outlines all of the webOS-specific events from webos-lib.
+
+**Example:**
+
+     {kind: "enyo.ApplicationEvents", onbackbutton: "handleBackGesture", onactivate: "handleActivate", ondeactivate: "handleDeactivate", onmenubutton: "handleMenuButton", onrelaunch: "handleRelaunch", onlowmemory:"handleLowMemory", onvirtualkeyboard: "handleVirtualKeyboard"}
+
+
 ##BackGesture
 
 A function that listens for the webOS Back Gesture and fires the onbackbutton signal. Both 2.x and Open webOS are supported, as well as phonegap and the Esc key on desktop browsers.
@@ -80,6 +89,14 @@ Another kind ported from Enyo 1, this is an onyx.Popup that has `modal:true` and
 	{name: "myDialog", kind:"ModalDialog", components[/* your components */, { kind: onyx.Button, content: "Close popup", ontap: "closePopup"}]}
 	closePopup: function() {this.$.myDialog.hide()};
 
+##PalmService
+
+_enyo.PalmService_ is a component similar to _enyo.WebService_, but for Palm service requests, with the ability to manage one or more active requests at any given time.
+
+**Example:**
+
+	{kind: "enyo.PalmService", service: "palm://com.palm.systemservice/time", method: "getSystemTime", onResponse:"handleResponse", onError:"handleError"}
+
 ##ProgressOrb
 
 A circular variant of the onyx progress bar with an button in the center. Uses an enyo.Animator for smooth transitions between values.
@@ -117,7 +134,7 @@ Static symkey functionality for webOS 1.x and 2.x.
 	
 When the symkey on the physical keyboard is pressed, this properly opens the
 symtable within webOS.  Automatically opens on the symkey, but can also be
-manually activated from `webos.SymKey.show()`.
+manually activated from `webos.showSymTable()`.
 
 ##VirtualKeyboard
 
