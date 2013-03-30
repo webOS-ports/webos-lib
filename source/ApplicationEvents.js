@@ -36,5 +36,6 @@ enyo.kind({
 	/**
 		Sent when the webOS virtual keyboard is opened or closed. Event data includes
 		a _"showing"_ property that will be either _true_ or _false_.
+	*/
 	onvirtualkeyboard: ""
 });

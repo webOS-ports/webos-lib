@@ -74,7 +74,7 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 	});
 }
 
-/* @public
+//* @public
 /**
 	Opens the webOS symtable popup on webOS 1.x and 2.x devices.
 	
