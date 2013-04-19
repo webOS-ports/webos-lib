@@ -4,6 +4,8 @@
 
 *Unified from webos-ports-lib, webOS-Ext & enyo1-to-enyo2 kinds by ShiftyAxel, Jason Robitaille and Arthur Thornton*
 
+**Full documentation can be found at [http://webos-ports.github.io/webos-lib/](http://webos-ports.github.io/webos-lib/)**
+
 ##AppMenu
 
 Ported from Enyo 1, the AppMenu kind will replicate the behavior of the standard app menu shown in webOS apps. This will have a slightly different style, though, since it uses onyx.Menu as opposed to a custom background image.
