@@ -97,11 +97,11 @@ enyo.kind({
 		}
 	},
 	requestSuccess: function(inRequest, inResponse) {
-		this.doResponse({request:inRequest, data:inData});
+		this.doResponse({request:inRequest, data:inResponse});
 		this.requestComplete(inRequest, inResponse);
 	},
 	requestFailure: function(inRequest, inError) {
-		this.doError({request:inRequest, data:inData});
+		this.doError({request:inRequest, data:inError});
 		this.requestComplete(inRequest, inResponse);
 	},
 	requestComplete: function(inRequest, inData) {
