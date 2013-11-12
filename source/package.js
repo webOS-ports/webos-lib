@@ -16,5 +16,10 @@ enyo.depends(
 	"AppMenu.css",
 	"HtmlContent.js",
 	"ModalDialog.js",
-	"WebView.js"
+	"WebView.js",
+	"CoreNavi.js",
+	"CoreNaviArranger.js",
+	"PortsHeader.js",
+	"PortsHeader.css",
+	"PortsSearch.js"
 );
