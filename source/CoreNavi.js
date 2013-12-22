@@ -3,6 +3,7 @@ enyo.kind({
 	style: "background-color: black;",
 	layoutKind: "FittableColumnsLayout",
 	fingerTracking: false, //Use legacy keyEvents by default, set to true to enable finger-tracking events
+	showing: true,
 	components:[
 		{style: "width: 33%;"},
 		{kind: "Image",
@@ -18,7 +19,7 @@ enyo.kind({
 	create: function() {
 		this.inherited(arguments);
 		if(window.PalmSystem)
-			this.addStyles("display: none;");
+			this.showing = false;
 	},
 	//CoreNaviDrag Event Synthesis
 	handleDragStart: function(inSender, inEvent) {
