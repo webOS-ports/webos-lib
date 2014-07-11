@@ -52,6 +52,9 @@ enyo.kind({
 			}
 			fullUrl += this.method;
 		}
+		if (fullUrl.indexOf("://") === -1) { //might also be luna://? Therefore just check for ://
+			fullUrl = "palm://" + fullUrl; //user probably forgot to add palm://.
+		}
 		if(this.subscribe) {
 			this.params.subscribe = this.subscribe;
 		}
