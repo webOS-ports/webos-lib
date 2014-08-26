@@ -225,10 +225,18 @@ webos = {
 		}
 		return inText;
 	},
+	ready: function() {
+		// FIXME: calling stageReady on a slight delay appears to
+		// fix apps starting with a blank screen. Hypothesis: we need to
+		// yield the thread between dom changes and stageReady.
+		setTimeout(function() {
+			PalmSystem.stageReady();
+		}, 1);
+	}
 };
 
 if (window.PalmSystem) {
-	PalmSystem.stageReady();
+	window.addEventListener("load", webos.ready, false);
 } else {
 	webos = {};
 }
