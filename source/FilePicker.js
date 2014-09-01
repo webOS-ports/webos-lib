@@ -20,7 +20,7 @@ The response object is an array of objects indicating chosen files:
 enyo.kind({
 	name: "enyo.FilePicker",
 	kind: "onyx.Popup",
-	style: "width: 450px; height: 80%;",
+	style: "width: 100%; height: 80%;",
 	published: {
 		/** Optional string or array.  Limits displayed files to the given type (or types).  
 			Possible types are: 'image', 'audio', 'video', 'document'.*/
