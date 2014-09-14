@@ -23,14 +23,14 @@ enyo.kind({
 	},
 	//* @public
 	show: function() {
-		var height = 40 * this.controls.length - 1; /* take the scroller out of the equation */
+		var height = 30 * this.controls.length - 1; /* take the scroller out of the equation */
 		
 		if (height > this.maxHeight) {
 			height = this.maxHeight;
 		}
 		
 		this.setBounds({
-			height: height + 20
+			height: height
 		});
 		this.inherited(arguments);
 	},
