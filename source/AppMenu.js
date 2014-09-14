@@ -2,6 +2,7 @@ enyo.kind({
 	name: "enyo.AppMenu",
 	kind: onyx.Menu,
 	classes: "enyo-appmenu",
+	style: "overflow: hidden;",
 	defaultKind: "enyo.AppMenuItem",
 	published: {
 		maxHeight: 400
