@@ -34,13 +34,18 @@ enyo.kind({
 		this.id = enyo._serviceCounter;
 	},
 	//* Execute the service request with an optional object for parameters to be sent.
-	go: function(inParams) {
-		if(!PalmServiceBridge) {
-			this.fail({
-				errorCode: -1,
-				errorText: "Invalid device for Palm services. PalmServiceBridge not found."
-			});
-			return undefined;
+		go: function(inParams) {
+			try{
+				if(!PalmServiceBridge) {
+					this.fail({
+					errorCode: -1,
+					errorText: "Invalid device for Palm services. PalmServiceBridge not found."
+				});
+				return undefined;
+			}
+		}catch (e){
+			console.log("Error No Palm Service Bridge");
+			return;
 		}
 		this.params = inParams || {};
 		this.bridge = new PalmServiceBridge();
