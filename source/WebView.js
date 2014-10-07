@@ -62,7 +62,9 @@ enyo.kind({
 		"tabIndex": 0
 	},
 	handlers: {
-		onblur: "blurHandler"
+		onblur: "blurHandler",
+		ontap: "clickHandler",
+		onkeypress: "keypressHandler"
 	},
 	requiresDomMousedown: true,
 	events: {
@@ -99,6 +101,9 @@ enyo.kind({
 	//* @protected
 	create: function() {
 		this.inherited(arguments);
+		if (typeof window.zoomFactor === "undefined") {
+			window.zoomFactor = 1.0;
+		}
 		this.history = [];
 		this.callQueue = [];
 		this.dispatcher = enyo.dispatcher;
@@ -136,8 +141,11 @@ enyo.kind({
 		}
 	},
 	blurHandler: function() {
-		if (window.PalmSystem) {
+		if (window.PalmSystem && !webos.isPhone()) {
 			window.PalmSystem.editorFocused(false, 0, 0);
+		}
+		if (webos.isPhone()) {
+			this.callBrowserAdapter("blur");
 		}
 	},
 	touchHandler: function() {
@@ -146,7 +154,7 @@ enyo.kind({
 	// check to make sure the adapter is ready to receive commands. when
 	// the node is hidden we cannot call adapter functions.
 	adapterReady: function() {
-		return this.hasNode() && this.node.openURL;
+		return this.hasNode() && (this.node.openURL || webos.isPhone());
 	},
 	// (browser adapter callback) we only get this if the view is initially
 	// hidden
@@ -174,6 +182,10 @@ enyo.kind({
 		try {
 			this.node.setPageIdentifier(this.identifier || this.id);
 			this.node.connectBrowserServer();
+
+			if (webos.isPhone()) {
+				this.serverConnected();
+			}
 		} catch (e) {
 			// eat the exception, this is expected while browserserver
 			// is starting up
@@ -252,6 +264,9 @@ enyo.kind({
 		if (b.width && b.height) {
 			this.callBrowserAdapter("setVisibleSize", [b.width, b.height]);
 		}
+		if (webos.isPhone()) {
+			this.callBrowserAdapter("setViewportSize", [b.width, b.height]);
+		}
 	},
 	urlChanged: function() {
 		if (this.url) {
@@ -284,6 +299,17 @@ enyo.kind({
 		this.callBrowserAdapter("handleFlick", [inEvent.xVel, inEvent.yVel]);
 		// prevent flick event from bubbling when flicking in webview
 		return true;
+	},
+	clickHandler: function(inSender, inEvent) {
+		if(webos.isPhone()) {
+			var rect = this.hasNode().getBoundingClientRect();
+			this.callBrowserAdapter("clickAt", [(-rect.left + inEvent.screenX) * window.zoomFactor, (-rect.top + inEvent.screenY) * window.zoomFactor, 0]);
+		}
+	},
+	keypressHandler: function(inSender, inEvent) {
+		if(webos.isPhone()) {
+			this.callBrowserAdapter("insertStringAtCursor", [String.fromCharCode(event.charCode)]);
+		}
 	},
 	enableJavascriptChanged: function() {
 		this.callBrowserAdapter("setEnableJavaScript", [this.enableJavascript]);
@@ -365,6 +391,8 @@ enyo.kind({
 	_callBrowserAdapter: function(inFuncName, inArgs) {
 		if (this.node[inFuncName]) {
 			this.node[inFuncName].apply(this.node, inArgs);
+		} else {
+			this.log("No method ", inFuncName, " on browserAdapter");
 		}
 	},
 	showFlashLockedMessage: function() {
@@ -450,10 +478,18 @@ enyo.kind({
 	// input field is focused
 	editorFocused: function(inFocused, inFieldType, inFieldActions) {
 		if (window.PalmSystem) {
-			if (inFocused) {
-				this.node.focus();
+			if (!webos.isPhone()) {
+				if (inFocused) {
+					this.node.focus();
+				}
+				window.PalmSystem.editorFocused(inFocused, inFieldType, inFieldActions);
+			} else {
+				if (inFocused) {
+					this.callBrowserAdapter("focus");
+				} else {
+					this.callBrowserAdapter("blur");
+				}
 			}
-			window.PalmSystem.editorFocused(inFocused, inFieldType, inFieldActions);
 		}
 		this.doEditorFocusChanged({
 			inFocused: inFocused,
@@ -534,9 +570,9 @@ enyo.kind({
 	// changes
 	flashGestureLockChange: function(enabled) {
 		this._flashGestureLock = enabled;
-        	if (this._flashGestureLock) {
-                    this.showFlashLockedMessage();
-                }
+			if (this._flashGestureLock) {
+					this.showFlashLockedMessage();
+				}
 	},
 	/**
 	(browser adapter callback) called when browser needs to create
