@@ -47,7 +47,29 @@ webos = {
 		* `wifiAvailable`
 	*/
 	deviceInfo: function(){
-		return enyo.json.parse(PalmSystem.deviceInfo);
+		if (!this._deviceInfo) {
+			if (!window.PalmSystem) {
+				this._deviceInfo = {
+					platfromVersionMajor: "",
+					modelName: "Browser"
+				};
+			} else {
+				this._deviceInfo = enyo.json.parse(PalmSystem.deviceInfo);
+			}
+		}
+		return this._deviceInfo;
+	},
+	/*
+	 * Returns true if device is legacy webOS phone.
+	 */
+	isPhone: function () {
+		return this.deviceInfo().platformVersionMajor <= 2;
+	},
+	isTablet: function () {
+		return this.deviceInfo().platformVersionMajor === 3;
+	},
+	isLuneOS: function () {
+		return (this.deviceInfo().modelName.indexOf("Lune") >= 0);
 	},
 	//* Returns the full URI path the application is running from.
 	fetchAppRootPath: function() {
