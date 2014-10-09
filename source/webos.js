@@ -47,7 +47,29 @@ webos = {
 		* `wifiAvailable`
 	*/
 	deviceInfo: function(){
-		return enyo.json.parse(PalmSystem.deviceInfo);
+		if (!this._deviceInfo) {
+			if (!window.PalmSystem) {
+				this._deviceInfo = {
+					platfromVersionMajor: "",
+					modelName: "Browser"
+				};
+			} else {
+				this._deviceInfo = enyo.json.parse(PalmSystem.deviceInfo);
+			}
+		}
+		return this._deviceInfo;
+	},
+	/*
+	 * Returns true if device is legacy webOS phone.
+	 */
+	isPhone: function () {
+		return this.deviceInfo().platformVersionMajor <= 2;
+	},
+	isTablet: function () {
+		return this.deviceInfo().platformVersionMajor === 3;
+	},
+	isLuneOS: function () {
+		return (this.deviceInfo().modelName.indexOf("Lune") >= 0);
 	},
 	//* Returns the full URI path the application is running from.
 	fetchAppRootPath: function() {
@@ -88,6 +110,13 @@ webos = {
 	},
 	//* Returns an object containing the _"locale"_, _"localeRegion"_, and _"phoneRegion"_.
 	localeInfo: function(){
+		if (!window.PalmSystem) {
+			return {
+				locale: "en",
+				localeRegion: "US",
+				phoneRegion: "001"
+			};
+		}
 		return {
 			locale: PalmSystem.locale,
 			localeRegion: PalmSystem.localeRegion,
@@ -96,10 +125,16 @@ webos = {
 	},
 	//* Whether or not the device is in 12-hour format.
 	isTwelveHourFormat: function(){
+		if (!window.PalmSystem) {
+			return true;
+		}
 		return (PalmSystem.timeFormat === "HH12");
 	},
 	//* Pastes any content in the clipboard.
 	pasteClipboard: function(){
+		if (!window.PalmSystem) {
+			return;
+		}
 		PalmSystem.paste();
 	},
 	/**
@@ -107,6 +142,9 @@ webos = {
 		or _"right"_.
 	*/
 	getWindowOrientation: function() {
+		if (!window.PalmSystem) {
+			return "up";
+		}
 		//Returns one of 'up', 'down', 'left' or 'right'.
 		return PalmSystem.screenOrientation;
 	},
@@ -115,11 +153,17 @@ webos = {
 		_"left"_, _"right"_, and _"free"_.
 	*/
 	setWindowOrientation: function(inOrientation) {
+		if (!window.PalmSystem) {
+			return;
+		}
 		//inOrientation is one of 'up', 'down', 'left', 'right', or 'free'
 		PalmSystem.setWindowOrientation(inOrientation);
 	},
 	//* Enables or disables fullscreen mode.
 	setFullScreen: function(inMode) {
+		if (!window.PalmSystem) {
+			return;
+		}
 		PalmSystem.enableFullScreenMode(inMode);
 	},
 	/**
@@ -127,6 +171,9 @@ webos = {
 		indicate new content, pass _false_ to remove indications.
 	*/
 	indicateNewContent: function(hasNew) {
+		if (!window.PalmSystem) {
+			return true;
+		}
 		if(webos._throbId) {
 			PalmSystem.removeNewContentIndicator(webos._throbId);
 			webos._throbId = undefined;
@@ -142,7 +189,7 @@ webos = {
 	isActivated: function(inWindow) {
 		inWindow = inWindow || window;
 		if(inWindow.PalmSystem) {
-			return inWindow.PalmSystem.isActivated
+			return inWindow.PalmSystem.isActivated;
 		}
 		return false;
 	},
@@ -178,10 +225,16 @@ webos = {
 		* `inSoundDuration`: duration of sound to play
 	*/
 	addBannerMessage: function(inMessage, inJson, inIcon, inSoundClass, inSoundPath, inSoundDuration) {
+		if (!window.PalmSystem) {
+			return 0;
+		}
 		return PalmSystem.addBannerMessage.apply(PalmSystem, arguments);
 	},
 	//* Removes a banner message by a given banner ID.
 	removeBannerMessage: function(inId) {
+		if (!window.PalmSystem) {
+			return;
+		}
 		PalmSystem.removeBannerMessage.apply(PalmSystem, arguments);
 	},
 	/**
@@ -220,7 +273,7 @@ webos = {
 		* `emoticon: true`
 	*/
 	runTextIndexer: function(inText, inOptions){
-		if (inText && inText.length > 0 && PalmSystem.runTextIndexer) {
+		if (inText && inText.length > 0 && window.PalmSystem && PalmSystem.runTextIndexer) {
 			return PalmSystem.runTextIndexer(inText, inOptions);
 		}
 		return inText;
@@ -237,8 +290,6 @@ webos = {
 
 if (window.PalmSystem) {
 	window.addEventListener("load", webos.ready, false);
-} else {
-	webos = {};
 }
 
 //* Reference pointing for convenience
