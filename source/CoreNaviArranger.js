@@ -1,7 +1,11 @@
-﻿enyo.kind({
+enyo.kind({
 	name: "enyo.CoreNaviArranger",
 	kind: "Arranger",
 	layoutClass: "enyo-arranger enyo-arranger-fit",
+	create: function() {
+		this.inherited(arguments);
+		console.log("creater called");
+	},
 	calcArrangementDifference: function(inI0, inA0, inI1, inA1) {
 		return this.containerBounds.width * 0.5;
 	},
@@ -10,7 +14,7 @@
 		for (var i=0, c; c=c$[i]; i++) {
 			this.pushPopControl(c, 0, 1);
 			c.setShowing(true);
-			c.resized();
+			c.render();
 		}
 		this.inherited(arguments);
 	},
@@ -37,7 +41,7 @@
 		for (var i=0, c; c=c$[i]; i++) {
 			c.setShowing(i == this.container.fromIndex || i == (this.container.toIndex));
 			if (c.showing) {
-				c.resized();
+				c.render();
 			}
 		}
 		//FIXME: Shouldn't be doing this here, but create() never gets called
@@ -60,7 +64,7 @@
 	},
 	pushPopControl: function(inControl, inScale, inOpacity) {
 		var s = inScale;
-		var o = inOpacity
+		var o = inOpacity;
 		if(enyo.dom.canAccelerate) {
 			inControl.applyStyle(this.vendor + "transform", "scale3d(" + s + "," + s + ",1)");
 		}
