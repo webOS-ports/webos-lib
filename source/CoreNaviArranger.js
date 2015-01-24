@@ -14,7 +14,7 @@ enyo.kind({
 		for (var i=0, c; c=c$[i]; i++) {
 			this.pushPopControl(c, 0, 1);
 			c.setShowing(true);
-			c.render();
+			c.resize();
 		}
 		this.inherited(arguments);
 	},
@@ -41,7 +41,7 @@ enyo.kind({
 		for (var i=0, c; c=c$[i]; i++) {
 			c.setShowing(i == this.container.fromIndex || i == (this.container.toIndex));
 			if (c.showing) {
-				c.render();
+				c.resize();
 			}
 		}
 		//FIXME: Shouldn't be doing this here, but create() never gets called
