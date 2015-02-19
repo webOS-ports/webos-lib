@@ -51,9 +51,6 @@ enyo.kind({
 	components: [
 		{name: "CrossApp", kind:"CrossAppUI", style: "width: 100%; height: 100%;", onResult: "handleResult"}
 	],
-	//components: [
-	//	{name: 'CrossApp', kind:"CrossAppUI", onResult: "handleResult"}
-	//],
 	//* Activates the modal FilePicker UI.
 	pickFile: function() {
 		this.updateParams();

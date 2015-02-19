@@ -4,7 +4,7 @@ enyo.kind({
 	tag: "iframe",
 	style: "border: 0;",
         published: {
-                app: "", //* String. id of the app whose UI will be displayed.
+                appId: "", //* String. id of the app whose UI will be displayed.
                 path: "", //* String. Relative path from the target app's main index file to the index file to be displayed.
                 params: null //* Object, optional.  Window params for the target UI document.
         },
@@ -26,7 +26,7 @@ enyo.kind({
 	},
 	rendered: function() {
 		this.inherited(arguments);
-		if (this.app) {
+		if (this.appId) {
 			this.appChanged();
 		} else if (this.path) {
 			this.pathChanged();
@@ -34,13 +34,13 @@ enyo.kind({
 	},
 	appChanged: function() {
 		this.appPath = "";
-		if (this.app) {
+		if (this.appId) {
 			var request = new enyo.ServiceRequest({
 				service: "palm://com.palm.applicationManager",
 				method: "getAppBasePath"
 			});
 			request.response(this, "gotAppInfo");
-			request.go({appId: this.app});
+			request.go({appId: this.appId});
 
 		} else {
 			this.pathChanged(); // rebuild whole path.
@@ -66,7 +66,7 @@ enyo.kind({
 			if (this.appPath) {
 				// If we've loaded an app path, use it.
 				targetPath = this.appPath+this.path;
-			} else if (!this.app) {
+			} else if (!this.appId) {
 				// Blank app means path is absolute.
 				targetPath = this.path;
 			}
@@ -81,7 +81,7 @@ enyo.kind({
 				}
 			}
 		}
-		this.setSrc(targetPath);
+		this.setAttribute("src", targetPath);
 	},
 	// FIXME: This hack should be removed once the real cause of DFISH-6462 is resolved.
 	checkLoad: function() {
