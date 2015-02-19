@@ -18,12 +18,12 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 		//* Opens the webOS symtable popup.
 		show: function(target) {
 			this.symKeyTarget = target || document;
-			this.request = new webOS.ServiceRequest({
+            this.request = new enyo.ServiceRequest({
 				service: "palm://com.palm.applicationManager",
 				method: "launch"
 			});
 			this.request.error(this, "serviceFailure");
-			request.go({
+			this.request.go({
 				"id":"com.palm.systemui",
 				"params": {
 					"action":"showAltChar"
@@ -40,12 +40,12 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 			enyo.error(enyo.json.stringify(inError));
 		},
 		relaunch: function(inSender, inEvent) {
-			var altCharSelected = enyo.json.parse(PalmSystem.launchParams).altCharSelected;
+			var altCharSelected = enyo.json.parse(window.PalmSystem.launchParams).altCharSelected;
 			if(!altCharSelected) {
 				return false;
 			}
 
-			var selection, newEvent, charCode;
+			var selection, charCode;
 			// Put the text into the editable element
 			selection = window.getSelection();
 			// make sure there are any available range to index as
@@ -62,7 +62,7 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 		},
 		sendFakeKey: function(eventType, charCode) {
 			var e = document.createEvent("Events");
-			e.initEvent(type, true, true);
+			e.initEvent(eventType, true, true);
 
 			e.keyCode = charCode;
 			e.charCode = charCode;
@@ -84,7 +84,7 @@ if(enyo.platform.webos && enyo.platform.webos < 3) {
 	The optional _target_ parameter specifies the target editable element that will
 	receive the key input events. Default, if not specified, is `document`.
 */
-webos.showSymTable = function(target) {
+enyo.webos.showSymTable = function(target) {
 	if(enyo.platform.webos && enyo.platform.webos < 3) {
 		enyo.SymKey.show(target);
 	}

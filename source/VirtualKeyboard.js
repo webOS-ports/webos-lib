@@ -1,8 +1,8 @@
 /**
 	Collection of static webOS virtual keyboard functions and constants.
-	
+
 	Sends an _"onvirtualkeyboard"_ signal that you can listen for like:
-		
+
 	`{kind: "enyo.Signals", onvirtualkeyboard: "handleVirtualKeyboard"}`
 */
 
@@ -63,7 +63,7 @@ webos.keyboard = {
 };
 
 
-if(window.PalmSystem && enyo.platform.webos && enyo.platform.webos >= 3) {
+if(window.PalmSystem && window.PalmSystem.setManualKeyboardEnabled) {
 	//if device has a virtual keyboard, add functions
 	Mojo = window.Mojo || {};
 	Mojo.keyboardShown = function (inKeyboardShowing) {
@@ -71,5 +71,13 @@ if(window.PalmSystem && enyo.platform.webos && enyo.platform.webos >= 3) {
 		enyo.Signals.send("onvirtualkeyboard", {type:"virtualkeyboard", showing: inKeyboardShowing});
 	}
 } else {
-	webos.keyboard = undefined;
+	webos.keyboard = {
+		isShowing: function() { return false; },
+		show: function () {},
+		hide: function () {},
+		setManualMode: function () {},
+		isManualMode: function () { return false; },
+		forceShow: function () {},
+		forceHide: function () {}
+	};
 }

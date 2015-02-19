@@ -64,8 +64,13 @@ enyo.kind({
 	handlers: {
 		onblur: "blurHandler",
 		ontap: "clickHandler",
-		onkeypress: "keypressHandler"
+		onpaste: "pasteHandler",
+		oncut: "cutHandler",
+		oncopy: "copyHandler"
 	},
+	components: [
+		{kind: "enyo.Signals", onkeypress: "keypressHandler" }
+	],
 	requiresDomMousedown: true,
 	events: {
 		onMousehold: "",
@@ -392,7 +397,7 @@ enyo.kind({
 		if (this.node[inFuncName]) {
 			this.node[inFuncName].apply(this.node, inArgs);
 		} else {
-			this.log("No method ", inFuncName, " on browserAdapter");
+			this.error("No method ", inFuncName, " on browserAdapter");
 		}
 	},
 	showFlashLockedMessage: function() {
