@@ -1,7 +1,12 @@
+/**
+ * Allows a sub-application to run in an IFRAME.
+ * Require enyo.ServiceRequest from the enyo-webos library.
+ */
 enyo.kind({
 	name: "enyo.CrossAppUI",
 	// TODO: Port enyo.Iframe class
 	tag: "iframe",
+	//* @private
 	style: "border: 0;",
         published: {
                 appId: "", //* String. id of the app whose UI will be displayed.

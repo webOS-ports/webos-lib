@@ -27,6 +27,8 @@ A convenient subkind of _enyo.Signals_ that outlines all of the webOS-specific e
 
 A function that listens for the webOS Back Gesture and fires the onbackbutton signal. Both 2.x and Open webOS are supported, as well as phonegap and the Esc key on desktop browsers.
 
+You don't instantiate this in your app, you listen with an enyo.Signals (or enyo.ApplicationEvents).
+
 **Example:**
 
      {kind: "enyo.Signals", onbackbutton: "handleBackGesture"}
@@ -80,6 +82,8 @@ An in-app gesture area that can be used for debugging. Emulates the Open webOS b
 Ported from the non-published set of Enyo 1 APIs to Enyo2, CrossAppUI takes a 'path' parameter (the HTML file to open) and displays it inside your application.
 The child application can pass stringified JSON prefixed with 'enyoCrossAppResult=' up to the CrossAppUI via the 'message' event (window scope). CrossAppUI will strip off the prefix, parse it into an object and fire onResult. This is intended to be used as a base class for app-in-app kinds, such as FilePicker (see below).
 
+Requires enyo.ServiceRequest, from the enyo-webos library.
+
 **message Event Example:**
 
      "enyoCrossAppResult={\"result\":[{\"fullPath\":\"/path/to/selected/file.foo\",\"iconPath\":\"/var/luna/extractfs//path/to/selected/file.foo:0:0:\",\"attachmentType\":\"image\",\"dbId\":\"++ILuOICkjNDQaUP\"}]}"
@@ -96,6 +100,9 @@ The child application can pass stringified JSON prefixed with 'enyoCrossAppResul
 
 Ported across from Enyo 1, this is a CrossAppUI kind that points to the built-in webOS filepicker. The onPickFile event is called when the file is chosen.
 
+Requires enyo.ServiceRequest, from the enyo-webos library.
+
+
 **onPickFile Output:**
 
      {"fullPath":"/path/to/selected/file.foo","iconPath":"/var/luna/extractfs//path/to/selected/file.foo:0:0:","attachmentType":"image","dbId":"++ILuOICkjNDQaUP"}
@@ -106,7 +113,8 @@ Ported across from Enyo 1, this is a CrossAppUI kind that points to the built-in
 
 ##HtmlContent
 
-Ported from Enyo 1, this is just a standard enyo.Control with `allowHtml:true` set so you don't have to
+Syntactical sugar for a Control with `allowHtml:true`.
+Like the Enyo 1 Control of the same name.
 
 **Example:**
 
@@ -121,6 +129,8 @@ Binds LunaSysMgr application events to Enyo signals.
 >_onmenubutton_: When the app menu is toggled<br>
 >_onrelaunch_: When the app is relaunched<br>
 >_onlowmemory_: To monitor for high memory usage<br>
+
+You don't instantiate this in your app, you listen with an enyo.Signals (or enyo.ApplicationEvents).
 
 **Example:**
 
@@ -137,11 +147,8 @@ Another kind ported from Enyo 1, this is an onyx.Popup that has `modal:true` and
 
 ##PalmService
 
-_enyo.PalmService_ is a component similar to _enyo.WebService_, but for Palm service requests, with the ability to manage one or more active requests at any given time.
-
-**Example:**
-
-	{kind: "enyo.PalmService", service: "palm://com.palm.systemservice/time", method: "getSystemTime", onResponse:"handleResponse", onError:"handleError"}
+_enyo.PalmService_ has been removed, in favor of enyo.LunaService in enyo-webos. 
+Your onResponse and onError functions must check the fields of inResponse, rather than inResponse.data.
 
 	
 ##PortsHeader
@@ -195,17 +202,9 @@ This is an enyo2 reimagining of the progress indicator from the webOS 2.x Browse
 
 ##ServiceRequest
 
-An extension of the enyo.Async object designed for webOS service requests. Supports subscription services.
+_enyo.ServiceRequest has been removed, in favor of enyo.ServiceRequest in enyo-webos.
+That should be a drop-in replacement
 
-**Example:**
-
-	var request = new enyo.ServiceRequest({
-		service: "palm://com.palm.systemservice/time",
-		method: "getSystemTime"
-	});
-	request.response(this, "responseSuccess");
-	request.error(this, "responseFailure");
-	request.go({}); //any params would go in here
 
 ##SymKey
 
@@ -214,6 +213,9 @@ Static symkey functionality for webOS 1.x and 2.x.
 When the symkey on the physical keyboard is pressed, this properly opens the
 symtable within webOS.  Automatically opens on the symkey, but can also be
 manually activated from `webos.showSymTable()`.
+
+Requires enyo.ServiceRequest, from the enyo-webos library.
+
 
 ##VirtualKeyboard
 

@@ -1,6 +1,10 @@
+/**
+ * Syntactical sugar for a modal onyx.Popup
+ */
+
 enyo.kind({
 	name: "enyo.ModalDialog",
-	kind: onyx.Popup,
+	kind: "onyx.Popup",
 	modal: true,
 	autoDismiss: false,
 	openAtCenter: function() {

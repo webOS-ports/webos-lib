@@ -6,6 +6,8 @@
 	_"onmenubutton"_: When the app menu is toggled
 	_"onrelaunch"_: When the app is relaunched
 	_"onlowmemory"_: Used to monitor an app's memory uasage
+
+	You don't instantiate this in your app, you listen with an enyo.Signals (or enyo.ApplicationEvents).
 */
 
 if (window.PalmSystem) {

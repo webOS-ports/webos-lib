@@ -758,6 +758,7 @@ enyo.kind({
 		onError: "",
 		onDisconnected: ""
 	},
+	//* @private
 	components: [
 		{name: "view", kind: enyo.BasicWebView,
 			onclick: "webviewClick",
