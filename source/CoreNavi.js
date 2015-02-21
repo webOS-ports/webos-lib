@@ -27,7 +27,7 @@ enyo.kind({
 		if(this.fingerTracking == false) {
 			if(inEvent.xDirection == -1) {
 				//Back Gesture
-				evB = document.createEvent("HTMLEvents");
+				var evB = document.createEvent("HTMLEvents");
 				evB.initEvent("keyup", "true", "true");
 				evB.keyIdentifier = "U+1200001";
 				document.dispatchEvent(evB);

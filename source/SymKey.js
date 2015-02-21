@@ -4,6 +4,8 @@
 	When the symkey on the physical keyboard is pressed, this properly opens the
 	symtable within webOS.  Automatically opens on the symkey, but can also be
 	manually activated from `webos.showSymTable()`.
+	
+	Requires enyo.ServiceRequest from the enyo-webos library.
 */
 
 if(enyo.platform.webos && enyo.platform.webos < 3) {

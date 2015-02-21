@@ -5,8 +5,6 @@ enyo.depends(
 	"LunaBindings.js",
 	"BackGesture.js",
 	"ApplicationEvents.js",
-	"ServiceRequest.js",
-	"PalmService.js",
 	"ProgressOrb.js",
 	"ProgressOrb.css",
 	"NumberPad.js",
@@ -18,7 +16,6 @@ enyo.depends(
 	"ModalDialog.js",
 	"WebView.js",
 	"CoreNavi.js",
-	"CoreNaviArranger.js",
 	"PortsHeader.js",
 	"PortsHeader.css",
 	"PortsSearch.js"
