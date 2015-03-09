@@ -290,15 +290,6 @@ webos = {
 	},
 
 	/**
-		Pastes text from the system clipboard into the control which is currently focused.
-	 */
-	paste: function () {
-		if (window.PalmSystem) {
-			window.PalmSystem.paste();
-		}
-	},
-
-	/**
 		Copies inText to system clipboard
 	 */
 	setClipboard: function (inText) {
@@ -307,11 +298,11 @@ webos = {
 		}
 		this._clipboardTextArea.value = inText;
 		document.body.appendChild(this._clipboardTextArea);
-		enyo.webos.setManualMode(true); //suspend keyboard
+		enyo.webos.keyboard.setManualMode(true); //suspend keyboard
 		this._clipboardTextArea.select();
 		document.execCommand("cut");
 		this._clipboardTextArea.blur();
-		enyo.webos.setManualMode(false);
+		enyo.webos.keyboard.setManualMode(false);
 		document.body.removeChild(this._clipboardTextArea);
 	},
 
@@ -324,14 +315,14 @@ webos = {
 		}
 		document.body.appendChild(this._clipboardTextArea);
 		this._clipboardTextArea.value = "";
-		enyo.webos.setManualMode(true); //suspend keyboard
+		enyo.webos.keyboard.setManualMode(true); //suspend keyboard
 		this._clipboardTextArea.select();
 		this._clipboardTextArea.oninput = function () {
 			inCallback(this._clipboardTextArea.value);
 			// "hide the textarea until it is needed again.
 			this._clipboardTextArea.value = "";
 			this._clipboardTextArea.blur();
-			enyo.webos.setManualMode(false);
+			enyo.webos.keyboard.setManualMode(false);
 			document.body.removeChild(this._clipboardTextArea);
 		}.bind(this);
 
