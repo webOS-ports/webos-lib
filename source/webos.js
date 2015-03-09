@@ -290,15 +290,6 @@ webos = {
 	},
 
 	/**
-		Pastes text from the system clipboard into the control which is currently focused.
-	 */
-	paste: function () {
-		if (window.PalmSystem) {
-			window.PalmSystem.paste();
-		}
-	},
-
-	/**
 		Copies inText to system clipboard
 	 */
 	setClipboard: function (inText) {
