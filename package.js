@@ -1,3 +1,4 @@
 enyo.depends(
-	"source"
+	"source",
+	"version.js"
 );
