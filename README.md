@@ -2,6 +2,9 @@
 
 *A selection of enyo2 kinds to restore functionality missing from enyo1*
 
+**For Enyo 2.5 and lower, use this.  For Enyo 2.7 and higher, use [enyo-luneos](https://github.com/JayCanuck/enyo-luneos.git)
+by Jason Robitaille**
+
 *Unified from webos-ports-lib, webOS-Ext & enyo1-to-enyo2 kinds by ShiftyAxel, Jason Robitaille and Arthur Thornton*
 
 **Full documentation can be found at [http://webos-ports.github.io/webos-lib/](http://webos-ports.github.io/webos-lib/)**
