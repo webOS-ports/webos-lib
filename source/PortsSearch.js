@@ -69,5 +69,17 @@ enyo.kind({
 	},
 	searchActive: function() {
 		return this.$.SearchInput.getValue() != "";
+	},
+	getSearchValue: function() {
+		return this.$.SearchInput.getValue();
+	},
+	//* Empties the search box and collapses it. Returns true if it was not already empty.
+	clearSearch: function() {
+		if (!this.searchActive()) {
+			return false;
+		}
+		this.$.SearchInput.setValue("");
+		this.closeSearch();
+		return true;
 	}
 });
