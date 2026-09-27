@@ -22,6 +22,23 @@ enyo.kind({
 	rendered: function() {
 		this.inherited(arguments);
 		this.$.Title.setContent(this.title);
-		this.$.Tagline.setContent(this.taglines[Math.floor(Math.random() * this.taglines.length)]);
+		this.$.Tagline.setContent(this.currentTagline());
+	},
+	/**
+		An explicit tagline set via setTagline() wins over the random pool, so a
+		caller can use the subtitle line to show live status instead.
+	*/
+	currentTagline: function() {
+		if (this.tagline) {
+			return this.tagline;
+		}
+		return this.taglines[Math.floor(Math.random() * this.taglines.length)];
+	},
+	//* Replaces the tagline with fixed text. Pass a falsy value to go back to the random pool.
+	setTagline: function(inText) {
+		this.tagline = inText;
+		if (this.$.Tagline) {
+			this.$.Tagline.setContent(this.currentTagline());
+		}
 	}
 });
