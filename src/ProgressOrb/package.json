@@ -1,0 +1,6 @@
+{
+	"main": "ProgressOrb.js",
+	"styles": [
+		"ProgressOrb.css"
+	]
+}
