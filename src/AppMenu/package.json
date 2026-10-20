@@ -1,0 +1,6 @@
+{
+	"main": "AppMenu.js",
+	"styles": [
+		"AppMenu.css"
+	]
+}

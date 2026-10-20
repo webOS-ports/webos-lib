@@ -1,0 +1,31 @@
+{
+	"name": "webos-lib",
+	"version": "2.7.0",
+	"main": "index.js",
+	"moduleDir": "src",
+	"assets": [
+		"images/*.png"
+	],
+	"styles": [],
+	"description": "webOS-Ports library of LuneOS-specific Enyo kinds and APIs (Enyo 2.7+ entry point; Enyo 2.5 and earlier use package.js/source/).",
+	"contributors": [
+		{
+			"name": "Jason Robitaille",
+			"url": "https://github.com/JayCanuck"
+		},
+		{
+			"name": "Josh Palmer",
+			"url": "https://github.com/ShiftyAxel"
+		},
+		{
+			"name": "Arthur Thornton",
+			"url": "https://github.com/ArthurThornton"
+		}
+	],
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/webOS-ports/webos-lib.git"
+	},
+	"homepage": "https://github.com/webOS-ports/webos-lib"
+}
